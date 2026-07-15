@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Amateur Radio Bands — SANDARC | The Coolest VEC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&family=Exo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon-cyan: #00fff7;
+    --neon-magenta: #ff00ff;
+    --neon-yellow: #fff700;
+    --deep-navy: #0a0a1a;
+    --darker-navy: #050510;
+    --card-bg: rgba(15,15,35,0.88);
+    --radio-wave: #4ecdc4;
+  }
+
+  @page { size: 11in 8.5in landscape; margin: 0.2in; }
+  @media print { body { zoom: 1 !important; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--deeper-navy, #050510);
+    color: #fff;
+    width: 10.6in;
+    min-height: 8.1in;
+    padding: 7px;
+    position: relative;
+
+  }
+
+  /* ── STARFIELD BACKGROUND ── */
+  .stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+  /* Layer 1: dense small stars */
+  .stars::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 15px 25px,  rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 45px 75px,  rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 80px 10px,  rgba(0,255,247,0.8), transparent),
+      radial-gradient(1px 1px at 110px 55px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 140px 90px, rgba(255,0,255,0.7), transparent),
+      radial-gradient(1px 1px at 170px 35px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 200px 120px,rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 230px 60px, rgba(0,255,247,0.9), transparent),
+      radial-gradient(1px 1px at 265px 20px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 295px 95px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 325px 45px, rgba(255,0,255,0.6), transparent),
+      radial-gradient(1px 1px at 360px 130px,rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 390px 70px, rgba(0,255,247,0.7), transparent),
+      radial-gradient(1px 1px at 420px 15px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 455px 100px,rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 490px 50px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 520px 140px,rgba(255,0,255,0.5), transparent),
+      radial-gradient(1px 1px at 555px 30px, rgba(0,255,247,0.8), transparent),
+      radial-gradient(1px 1px at 585px 85px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 620px 60px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 650px 110px,rgba(255,0,255,0.6), transparent),
+      radial-gradient(1px 1px at 685px 25px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 715px 75px, rgba(0,255,247,0.7), transparent),
+      radial-gradient(1px 1px at 750px 140px,rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 780px 40px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 815px 90px, rgba(255,0,255,0.5), transparent),
+      radial-gradient(1px 1px at 845px 15px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 875px 120px,rgba(0,255,247,0.9), transparent);
+    background-size: 900px 160px;
+    animation: twinkle1 8s ease-in-out infinite;
+  }
+  /* Layer 2: brighter accent stars + 2nd density layer */
+  .stars::after {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1.5px 1.5px at 25px 60px,  rgba(0,255,247,1.0), transparent),
+      radial-gradient(1px   1px   at 75px 30px,  rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 130px 100px,rgba(255,0,255,0.9), transparent),
+      radial-gradient(1px   1px   at 185px 45px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(2px   2px   at 240px 80px, rgba(0,255,247,0.8), transparent),
+      radial-gradient(1px   1px   at 300px 20px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.5px 1.5px at 355px 115px,rgba(255,0,255,0.7), transparent),
+      radial-gradient(1px   1px   at 415px 55px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px   2px   at 470px 95px, rgba(0,255,247,1.0), transparent),
+      radial-gradient(1px   1px   at 530px 35px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 590px 130px,rgba(255,0,255,0.8), transparent),
+      radial-gradient(1px   1px   at 645px 70px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(2px   2px   at 700px 25px, rgba(0,255,247,0.9), transparent),
+      radial-gradient(1px   1px   at 760px 105px,rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 820px 50px, rgba(255,0,255,0.6), transparent),
+      radial-gradient(2px   2px   at 870px 85px, rgba(0,255,247,0.8), transparent);
+    background-size: 900px 160px;
+    animation: twinkle2 12s ease-in-out infinite reverse;
+  }
+  @keyframes twinkle1 {
+    0%,100% { opacity: 0.55; } 40% { opacity: 1.0; } 70% { opacity: 0.7; }
+  }
+  @keyframes twinkle2 {
+    0%,100% { opacity: 0.7; } 30% { opacity: 1.0; } 60% { opacity: 0.5; }
+  }
+
+  /* shooting stars */
+  .shoot {
+    position: fixed; height: 1.5px; border-radius: 50%;
+    z-index: 0; pointer-events: none; opacity: 0;
+    animation: shoot var(--dur,7s) ease-in-out var(--delay,0s) infinite;
+  }
+  .shoot-1 { top:8%;  left:15%; width:120px; background:linear-gradient(90deg,var(--neon-cyan),transparent); --dur:9s;  --delay:0s; }
+  .shoot-2 { top:22%; left:50%; width:90px;  background:linear-gradient(90deg,rgba(255,255,255,0.9),transparent); --dur:7s;  --delay:3s; }
+  .shoot-3 { top:55%; left:35%; width:140px; background:linear-gradient(90deg,var(--neon-magenta),transparent); --dur:11s; --delay:5s; }
+  .shoot-4 { top:70%; left:65%; width:80px;  background:linear-gradient(90deg,var(--neon-cyan),transparent); --dur:8s;  --delay:1.5s; }
+  @keyframes shoot {
+    0%   { opacity:0; transform:translateX(0)   translateY(0)   rotate(-32deg); }
+    4%   { opacity:1; }
+    18%  { opacity:0; transform:translateX(280px) translateY(140px) rotate(-32deg); }
+    100% { opacity:0; transform:translateX(280px) translateY(140px) rotate(-32deg); }
+  }
+
+  /* nebula/glowing orbs */
+  .orb {
+    position: fixed; border-radius: 50%; z-index: 0; pointer-events: none;
+    animation: orb-float var(--dur,25s) ease-in-out infinite;
+  }
+  .orb-1 {
+    width:500px; height:500px; top:-200px; right:-150px;
+    background:radial-gradient(circle at 30% 30%, rgba(255,0,255,0.14), rgba(255,0,255,0.04) 50%, transparent 70%);
+    --dur:28s;
+  }
+  .orb-2 {
+    width:380px; height:380px; bottom:-120px; left:-100px;
+    background:radial-gradient(circle at 40% 40%, rgba(0,255,247,0.13), rgba(0,255,247,0.03) 50%, transparent 70%);
+    --dur:22s;
+  }
+  .orb-3 {
+    width:220px; height:220px; top:40%; right:10%;
+    background:radial-gradient(circle at 35% 35%, rgba(255,247,0,0.07), transparent 65%);
+    --dur:18s;
+  }
+  @keyframes orb-float {
+    0%,100% { transform:translate(0,0) scale(1); }
+    25%     { transform:translate(18px,-18px) scale(1.04); }
+    50%     { transform:translate(-10px,12px) scale(0.97); }
+    75%     { transform:translate(12px,10px)  scale(1.02); }
+  }
+
+  /* ── ALL CONTENT above background ── */
+  .page-wrap { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    background: rgba(5,5,20,0.7);
+    border: 1.5px solid rgba(0,255,247,0.35);
+    border-radius: 10px;
+    padding: 7px 12px;
+    margin-bottom: 7px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0,255,247,0.08), inset 0 0 30px rgba(0,255,247,0.03);
+  }
+
+  .logo-wrap img {
+    height: 56px; width: 56px;
+    filter: drop-shadow(0 0 10px rgba(0,255,247,0.5)) drop-shadow(0 0 20px rgba(255,0,255,0.3));
+  }
+
+  .title-block h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 30px; letter-spacing: 2px; line-height: 1;
+    background: linear-gradient(180deg, #fff 0%, var(--neon-cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 8px rgba(0,255,247,0.4));
+  }
+  .title-block h2 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 11px; font-weight: 800;
+    color: var(--neon-cyan); letter-spacing: 2.5px; text-transform: uppercase;
+    margin-top: 2px;
+    text-shadow: 0 0 10px rgba(0,255,247,0.5);
+  }
+  .title-block .tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px; color: var(--neon-magenta);
+    letter-spacing: 1px; margin-top: 1px;
+    text-shadow: 0 0 8px rgba(255,0,255,0.5);
+  }
+
+  .power-note {
+    font-size: 8px; color: rgba(255,255,255,0.65);
+    max-width: 230px; line-height: 1.45;
+    border-left: 2px solid var(--neon-cyan); padding-left: 7px;
+  }
+  .power-note strong { color: var(--neon-cyan); }
+
+  .header-right { text-align: right; }
+  .eff-date { font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 3px; font-family: 'Space Mono', monospace; }
+  .sandarc-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+    color: var(--deeper-navy, #050510);
+    font-family: 'Space Mono', monospace;
+    font-size: 8px; font-weight: 700;
+    padding: 2px 8px; border-radius: 50px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ── MAIN GRID ── */
+  .main {
+    display: grid;
+    grid-template-columns: 1.3fr 2.25fr 1.95fr 1.95fr;
+    gap: 6px;
+    align-items: start;
+  }
+
+  /* ── BAND CARDS ── */
+  .band {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,255,247,0.12);
+    border-radius: 6px;
+    padding: 5px 6px;
+    margin-bottom: 5px;
+    backdrop-filter: blur(6px);
+    transition: border-color 0.3s;
+  }
+  .band:hover { border-color: rgba(0,255,247,0.3); }
+
+  .band-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 8.5px; font-weight: 700;
+    color: var(--neon-cyan);
+    border-bottom: 1px solid rgba(0,255,247,0.2);
+    padding-bottom: 2px; margin-bottom: 3px;
+    text-shadow: 0 0 8px rgba(0,255,247,0.4);
+  }
+  .band-note {
+    font-size: 7px; color: rgba(255,255,255,0.5);
+    margin-bottom: 3px; line-height: 1.4;
+  }
+
+  /* ── BAR ROWS ── */
+  .bar-row {
+    display: flex;
+    height: 11px; margin-bottom: 2px; align-items: stretch;
+  }
+  .bar-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px; color: var(--neon-cyan);
+    width: 30px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 3px; font-weight: 700;
+    line-height: 1;
+  }
+  .bar-label.xs { width: 40px; font-size: 7px; }
+
+  .bar-seg {
+    height: 100%; flex: var(--flex,1);
+    position: relative;
+  }
+  /* Mode colors — FCC Part 97 band segments */
+  .seg-rt  { background: #c24fc2; }                         /* RTTY/data */
+  .seg-ph  { background: #3d9bff; }                         /* phone/image */
+  .seg-cw  { background: repeating-linear-gradient(
+               45deg,#333 0,#333 2px,#777 2px,#777 4px); }  /* CW only */
+  .seg-ssb { background: #fff700; }                         /* SSB phone */
+  .seg-usb { background: #4ecdc4; }                         /* USB/CW/RTTY/data */
+  .seg-fdm { background: #ff6b35; }                         /* fixed digital */
+  .seg-gap { background: transparent; }
+  .seg-all { background: linear-gradient(180deg, #c24fc2 0 50%, #3d9bff 50% 100%); }  /* all modes */
+
+  /* glow on hover for bars */
+  .bar-row:hover .seg-rt  { box-shadow: 0 0 5px #c24fc2; }
+  .bar-row:hover .seg-ph  { box-shadow: 0 0 5px #3d9bff; }
+  .bar-row:hover .seg-ssb { box-shadow: 0 0 5px #fff700; }
+  .bar-row:hover .seg-usb { box-shadow: 0 0 5px #4ecdc4; }
+  .bar-row:hover .seg-fdm { box-shadow: 0 0 5px #ff6b35; }
+  .bar-row:hover .seg-all { box-shadow: 0 0 5px #3d9bff; }
+
+  /* freq labels */
+  .freq-line {
+    display: flex; justify-content: space-between;
+    padding-left: 28px; font-family: 'Space Mono', monospace;
+    font-size: 7px; color: rgba(255,255,255,0.55);
+    margin-top: 1px; margin-bottom: 1px;
+  }
+  .freq-line.xs { padding-left: 34px; }
+
+  /* ── KEY / LEGEND BOX ── */
+  .key-box {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(0,255,247,0.25);
+    border-radius: 8px; padding: 7px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0,255,247,0.05);
+  }
+  .key-title {
+    font-family: 'Bangers', cursive;
+    font-size: 15px; color: var(--neon-cyan);
+    text-align: center; letter-spacing: 3px;
+    text-shadow: 0 0 12px rgba(0,255,247,0.6);
+    border-bottom: 1px solid rgba(0,255,247,0.2);
+    padding-bottom: 4px; margin-bottom: 5px;
+  }
+  .key-item {
+    display: flex; align-items: center; gap: 5px; margin-bottom: 3px;
+  }
+  .key-sw {
+    display: block;
+    width: 30px; height: 12px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 2px;
+  }
+  .key-desc { font-size: 7.5px; color: rgba(255,255,255,0.75); line-height: 1.3; }
+
+  .key-divider {
+    border: none; border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 5px 0;
+  }
+  .key-lic-item {
+    font-size: 7.5px; color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5px; font-family: 'Space Mono', monospace;
+  }
+  .key-lic-item .lc { color: var(--neon-cyan); font-weight: 700; }
+
+  .key-note {
+    font-size: 7px; color: rgba(255,255,255,0.45);
+    line-height: 1.5; margin-top: 5px;
+    border-top: 1px solid rgba(255,255,255,0.07); padding-top: 4px;
+  }
+  .key-note strong { color: var(--neon-cyan); }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(255,0,255,0.2);
+    border-radius: 8px; padding: 7px; margin-top: 5px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(255,0,255,0.04);
+  }
+  .info-title {
+    font-family: 'Bangers', cursive;
+    font-size: 13.5px; color: var(--neon-magenta);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255,0,255,0.5);
+    margin-bottom: 1px;
+  }
+  .info-line { font-size: 7.5px; color: rgba(255,255,255,0.65); margin-bottom: 2px; line-height: 1.4; }
+  .info-line a { color: var(--neon-cyan); text-decoration: none; }
+  .info-line.accent { color: var(--neon-cyan); font-weight: 600; }
+
+  /* ── MICROWAVE ── */
+  .mw-box {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,255,247,0.1);
+    border-radius: 6px; padding: 5px; margin-top: 5px;
+    backdrop-filter: blur(6px);
+  }
+  .mw-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px; color: var(--neon-cyan);
+    margin-bottom: 3px;
+    text-shadow: 0 0 6px rgba(0,255,247,0.4);
+  }
+  .mw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px 5px; }
+  .mw-item { font-size: 7px; color: rgba(255,255,255,0.55); font-family: 'Space Mono', monospace; }
+
+  /* ── 60m special ── */
+  .sixty-ch {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 8px;
+    background: #4ecdc4; border: 0.5px solid rgba(255,255,255,0.2);
+    font-size: 6px; color: #000; font-weight: 700;
+    box-shadow: 0 0 4px #4ecdc4;
+  }
+  .sixty-freq { font-family: 'Space Mono', monospace; font-size: 6.5px; color: rgba(255,255,255,0.55); }
+
+  /* geo note */
+  .geo-note {
+    font-size: 7px; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(0,255,247,0.1); border-radius: 4px;
+    padding: 3px 5px; margin-top: 4px; margin-bottom: 5px;
+  }
+  .geo-note strong { color: var(--neon-cyan); }
+
+  /* copyright */
+  .copyright {
+    text-align: center; font-size: 6.5px; color: rgba(255,255,255,0.25);
+    margin-top: 5px; font-family: 'Space Mono', monospace;
+  }
+
+  /* ── TICK MARKS ── */
+  .bars-wrap { position: relative; }
+  .tick-ruler-wrap { padding-left: 30px; margin-top: 1px; margin-bottom: 1px; position: relative; z-index: 2; }
+  .tick-ruler-wrap.xs { padding-left: 40px; }
+
+
+  /* Prohibited / no-transmit zone */
+  .seg-blocked {
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(220,30,30,0.55) 0, rgba(220,30,30,0.55) 2px,
+      rgba(120,0,0,0.25) 2px, rgba(120,0,0,0.25) 4px
+    );
+  }
+
+</style>
+</head>
+<body>
+
+<div class="stars" aria-hidden="true"></div>
+<div class="shoot shoot-1" aria-hidden="true"></div>
+<div class="shoot shoot-2" aria-hidden="true"></div>
+<div class="shoot shoot-3" aria-hidden="true"></div>
+<div class="shoot shoot-4" aria-hidden="true"></div>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="orb orb-3" aria-hidden="true"></div>
+
+<div class="page-wrap">
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="header">
+  <div class="logo-wrap">
+    <img src="https://assets.sandarc.org/logo/current-logo.png" alt="SANDARC Logo">
+  </div>
+  <div class="title-block">
+    <h1>US Amateur Radio Bands</h1>
+    <h2>San Diego County Amateur Radio Council</h2>
+    <div class="tagline">The Coolest VEC · sandarc.org</div>
+  </div>
+  <div class="power-note">
+    <strong>US AMATEUR POWER LIMITS — FCC 97.313</strong><br>
+    An amateur station must use the minimum transmitter power necessary to carry out the
+    desired communications. No station may transmit with a transmitter power exceeding
+    <strong>1.5 kW PEP</strong>.
+  </div>
+  <div class="header-right">
+    <div class="sandarc-badge">Est. 1958</div>
+    <div class="eff-date">Effective: March 5, 2012<br>Revised: Jan 16, 2026<br>Source: FCC Part 97</div></div>
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
+
+  <!-- ═══ COL 1: KEY + INFO ═══ -->
+  <div>
+
+    <div class="key-box">
+      <div class="key-title">— KEY —</div>
+
+      <div class="key-item">
+        <div class="key-sw" style="background:#c24fc2;box-shadow:0 0 6px #c24fc2;"></div>
+        <div class="key-desc">RTTY and data</div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:#3d9bff;box-shadow:0 0 6px #3d9bff;"></div>
+        <div class="key-desc">Phone and image</div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:linear-gradient(180deg,#c24fc2 0 50%,#3d9bff 50% 100%);"></div>
+        <div class="key-desc">All modes — RTTY, data, phone, and image</div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:repeating-linear-gradient(45deg,#333 0,#333 2px,#777 2px,#777 4px);"></div>
+        <div class="key-desc">CW <em>only</em></div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:#fff700;box-shadow:0 0 6px #fff700;"></div>
+        <div class="key-desc">SSB phone</div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:#4ecdc4;box-shadow:0 0 6px #4ecdc4;"></div>
+        <div class="key-desc">USB phone, CW, RTTY, and data</div>
+      </div>
+      <div class="key-item">
+        <div class="key-sw" style="background:#ff6b35;box-shadow:0 0 6px #ff6b35;"></div>
+        <div class="key-desc">Fixed digital message forwarding <em>only</em></div>
+      </div>
+
+      <hr class="key-divider">
+
+      <div class="key-lic-item"><span class="lc">E</span> = Amateur Extra</div>
+      <div class="key-lic-item"><span class="lc">A</span> = Advanced</div>
+      <div class="key-lic-item"><span class="lc">G</span> = General</div>
+      <div class="key-lic-item"><span class="lc">T</span> = Technician</div>
+      <div class="key-lic-item"><span class="lc">N</span> = Novice</div>
+
+      <div class="key-note">
+        <strong>Note:</strong> CW operation is permitted throughout all amateur bands.<br><br>
+        MCW is authorized above 50.1 MHz, except 144.0–144.1 and 219–220 MHz.<br><br>
+        Test transmissions authorized above 51 MHz, except 219–220 MHz.
+      </div>
+
+      <div style="text-align:center;margin-top:5px;">
+        <a href="https://www.ecfr.gov/current/title-47/chapter-I/subchapter-D/part-97" style="font-family:'Space Mono',monospace;font-size:7px;color:var(--neon-cyan);text-decoration:none;text-shadow:0 0 6px rgba(0,255,247,0.5);">FCC Part 97 →</a>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title">SANDARC</div>
+      <div class="info-line accent">San Diego County Amateur Radio Council</div>
+      <div class="info-line">Founded 1958 · 501(c)(4) Non-Profit</div>
+        <div class="info-line"><a href="https://sandarc.org">sandarc.org</a> · <a href="mailto:VEC@sandarc.org">VEC@sandarc.org</a></div>
+
+      <hr style="border:none;border-top:1px solid rgba(255,0,255,0.15);margin:5px 0;">
+      <div class="info-line accent" style="color:var(--neon-magenta);">Free License Exams</div>
+      <div class="info-line">Technician · General · Extra Class</div>
+      <div class="info-line">In-person (San Diego) &amp; Online worldwide</div>
+      <div class="info-line">Nearly every Saturday — walk-ins welcome</div>
+
+      <hr style="border:none;border-top:1px solid rgba(255,0,255,0.15);margin:5px 0;">
+      <div class="info-line" style="color:rgba(255,255,255,0.4);font-family:'Space Mono',monospace;font-size:6.5px;">Phone: 619-215-1886</div>
+      <div class="info-line" style="color:rgba(255,255,255,0.4);font-family:'Space Mono',monospace;font-size:6.5px;">PO Box 26903, San Diego CA 92196</div>
+
+    </div>
+
+    <div class="copyright">
+      © SANDARC 2026 · FCC Part 97 effective March 5, 2012, revised Jan 16, 2026 · For amateur radio use only
+    </div>
+
+  </div>
+
+
+  <!-- ═══ COL 2: LF + Low HF ═══ -->
+  <div>
+
+    <!-- 2200m -->
+    <div class="band">
+      <div class="band-title">2,200 Meters (135 kHz)</div>
+      <div class="band-note">1 W EIRP max · Must register with UTC (utc.org) before operating</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G</div>
+          <div class="bar-seg seg-all" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">135.7 kHz</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">137.8 kHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 630m -->
+    <div class="band">
+      <div class="band-title">630 Meters (472 kHz)</div>
+      <div class="band-note">5 W EIRP max (1 W EIRP in AK within 496 mi of Russia) · Register with UTC first</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G</div>
+          <div class="bar-seg seg-all" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">472 kHz</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">479 kHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 160m -->
+    <div class="band">
+      <div class="band-title">160 Meters (1.8 MHz)</div>
+      <div class="band-note">All modes · Avoid interference to radiolocation ops 1.900–2.000 MHz</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G</div>
+          <div class="bar-seg seg-all" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1.800</text>
+      <line x1="50.00%" y1="-14" x2="50.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="48.5%" y1="6.5" x2="51.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="50.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1.900</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">2.000 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 80m -->
+    <div class="band">
+      <div class="band-title">80 Meters (3.5 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E</div>
+          <div class="bar-seg seg-rt" style="--flex:2.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:8.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">A</div>
+          <div class="bar-seg seg-gap" style="--flex:1.0"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:2.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:6.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">G</div>
+          <div class="bar-seg seg-gap" style="--flex:1.0"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:4.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:4.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N,T 200W</div>
+          <div class="bar-seg seg-gap" style="--flex:1.0"></div>
+          <div class="bar-seg seg-cw" style="--flex:1.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:8.0"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-53" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">3.500</text>
+      <line x1="10.00%" y1="-53" x2="10.00%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="8.5%" y1="20" x2="11.5%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="10.00%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">3.525</text>
+      <line x1="20.00%" y1="-53" x2="20.00%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="18.5%" y1="20" x2="21.5%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="20.00%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">3.600</text>
+      <line x1="40.00%" y1="-53" x2="40.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="38.5%" y1="6.5" x2="41.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="40.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">3.700</text>
+      <line x1="60.00%" y1="-53" x2="60.00%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="58.5%" y1="20" x2="61.5%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="60.00%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">3.800</text>
+      <line x1="100%" y1="-53" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">4.000 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 60m -->
+    <div class="band">
+      <div class="band-title">60 Meters (5.3 MHz) — E, A, G only</div>
+      <div class="band-note">USB channels: 100 W ERP max · WRC-15 segment: 9.15 W ERP max (eff. Feb 13, 2026) · 2.8 kHz BW</div>
+      <div style="margin-bottom:3px;">
+        <div style="font-size:7px;color:var(--neon-cyan);margin-bottom:2px;font-family:'Space Mono',monospace;">USB Channels (100 W):</div>
+        <div style="display:flex;gap:6px;align-items:flex-end;margin-bottom:3px;">
+          <div style="text-align:center"><div class="sixty-ch">USB</div><div class="sixty-freq">5330.5</div></div>
+          <div style="text-align:center"><div class="sixty-ch">USB</div><div class="sixty-freq">5346.5</div></div>
+          <div style="text-align:center"><div class="sixty-ch">USB</div><div class="sixty-freq">5371.5</div></div>
+          <div style="text-align:center"><div class="sixty-ch">USB</div><div class="sixty-freq">5403.5</div></div>
+          <div style="font-size:6.5px;color:rgba(255,255,255,0.4);margin-left:2px;">(kHz USB dial freq)</div>
+        </div>
+        <div style="font-size:7px;color:var(--neon-cyan);margin-bottom:2px;font-family:'Space Mono',monospace;">WRC-15 (9.15 W ERP):</div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div style="width:72px;height:8px;background:#4ecdc4;box-shadow:0 0 4px #4ecdc4;display:flex;align-items:center;justify-content:center;font-size:6px;color:#000;font-weight:700;">USB + CW/Dig</div>
+          <div class="sixty-freq">5351.5 – 5366.5 kHz</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 40m -->
+    <div class="band">
+      <div class="band-title">40 Meters (7 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E</div>
+          <div class="bar-seg seg-rt" style="--flex:1.25"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.75"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">A</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.75"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">G</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:0.5"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.25"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N,T†200W</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-cw" style="--flex:1.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:1.75"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-53" x2="0%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="20" x2="2%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">7.000</text>
+      <line x1="8.33%" y1="-53" x2="8.33%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="6.83%" y1="6.5" x2="9.83%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="8.33%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">7.025</text>
+      <line x1="41.67%" y1="-53" x2="41.67%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="40.17%" y1="20" x2="43.17%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="41.67%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">7.125</text>
+      <line x1="58.33%" y1="-53" x2="58.33%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="56.83%" y1="6.5" x2="59.83%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="58.33%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">7.175</text>
+      <line x1="100%" y1="-53" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">7.300 MHz</text>
+      </svg>
+    </div>
+      <div style="font-size:6.5px;color:rgba(255,255,255,0.4);padding-left:40px;font-family:'Space Mono',monospace;">† N,T outside Region 2 (7.025–7.125) · Phone 7.075–7.100: ITU R1,3 &amp; stns west of 130°W or below 20°N only</div>
+    </div>
+
+    <!-- 30m -->
+    <div class="band">
+      <div class="band-title">30 Meters (10.1 MHz)</div>
+      <div class="band-note">200 W PEP max · Avoid interference to fixed services outside the US · See §97.305(c), 97.307(f)(11)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G</div>
+          <div class="bar-seg seg-rt" style="--flex:1;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:7px;color:#000;font-weight:700;font-family:'Space Mono',monospace;">200 W PEP</span>
+          </div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">10.100 MHz</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">10.150 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ COL 3: HF Mid ═══ -->
+  <div>
+
+    <!-- 20m -->
+    <div class="band">
+      <div class="band-title">20 Meters (14 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E</div>
+          <div class="bar-seg seg-rt" style="--flex:1.5"></div>
+          <div class="bar-seg seg-ph" style="--flex:2.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">A</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.25"></div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.75"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">G</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.25"></div>
+          <div class="bar-seg seg-gap" style="--flex:0.75"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.25"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-40" x2="0%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="20" x2="2%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.000</text>
+      <line x1="7.14%" y1="-40" x2="7.14%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="5.64%" y1="6.5" x2="8.64%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="7.14%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.025</text>
+      <line x1="42.86%" y1="-40" x2="42.86%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="41.36%" y1="20" x2="44.36%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="42.86%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.150</text>
+      <line x1="50.00%" y1="-40" x2="50.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="48.5%" y1="6.5" x2="51.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="50.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.175</text>
+      <line x1="64.29%" y1="-40" x2="64.29%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="62.79%" y1="20" x2="65.79%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="64.29%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.225</text>
+      <line x1="100%" y1="-40" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">14.350 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 17m -->
+    <div class="band">
+      <div class="band-title">17 Meters (18 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G</div>
+          <div class="bar-seg seg-rt"  style="--flex:0.42"></div>
+          <div class="bar-seg seg-ph"  style="--flex:0.58"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">18.068</text>
+      <line x1="42.00%" y1="-14" x2="42.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="40.50%" y1="6.5" x2="43.50%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="42.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">18.110</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">18.168 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 15m -->
+    <div class="band">
+      <div class="band-title">15 Meters (21 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E</div>
+          <div class="bar-seg seg-rt" style="--flex:2.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:2.5"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">A</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.75"></div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-ph" style="--flex:2.25"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">G</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-rt" style="--flex:1.75"></div>
+          <div class="bar-seg seg-gap" style="--flex:0.75"></div>
+          <div class="bar-seg seg-ph" style="--flex:1.75"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N,T 200W</div>
+          <div class="bar-seg seg-gap" style="--flex:0.25"></div>
+          <div class="bar-seg seg-cw" style="--flex:1.75"></div>
+          <div class="bar-seg seg-gap" style="--flex:2.5"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-53" x2="0%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="20" x2="2%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.000</text>
+      <line x1="5.56%" y1="-53" x2="5.56%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="4.06%" y1="6.5" x2="7.06%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="5.56%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.025</text>
+      <line x1="44.44%" y1="-53" x2="44.44%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="42.94%" y1="20" x2="45.94%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="44.44%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.200</text>
+      <line x1="50.00%" y1="-53" x2="50.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="48.5%" y1="6.5" x2="51.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="50.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.225</text>
+      <line x1="61.11%" y1="-53" x2="61.11%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="59.61%" y1="20" x2="62.61%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="61.11%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.275</text>
+      <line x1="100%" y1="-53" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">21.450 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 12m -->
+    <div class="band">
+      <div class="band-title">12 Meters (24 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G</div>
+          <div class="bar-seg seg-rt" style="--flex:0.4"></div>
+          <div class="bar-seg seg-ph" style="--flex:0.6"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">24.890</text>
+      <line x1="40.00%" y1="-14" x2="40.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="38.5%" y1="6.5" x2="41.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="40.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">24.930</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">24.990 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 10m -->
+    <div class="band">
+      <div class="band-title">10 Meters (28 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G</div>
+          <div class="bar-seg seg-rt" style="--flex:3.0"></div>
+          <div class="bar-seg seg-ph" style="--flex:14.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N,T 200W</div>
+          <div class="bar-seg seg-rt" style="--flex:3.0"></div>
+          <div class="bar-seg seg-ssb" style="--flex:2.0"></div>
+          <div class="bar-seg seg-gap" style="--flex:12.0"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-27" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">28.000</text>
+      <line x1="17.65%" y1="-27" x2="17.65%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="16.15%" y1="20" x2="19.15%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="17.65%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">28.300</text>
+      <line x1="29.41%" y1="-27" x2="29.41%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="27.91%" y1="6.5" x2="30.91%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="29.41%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">28.500</text>
+      <line x1="100%" y1="-27" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">29.700 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 6m -->
+    <div class="band">
+      <div class="band-title">6 Meters (50 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G,T</div>
+          <div class="bar-seg seg-cw"  style="--flex:0.1"></div>
+          <div class="bar-seg seg-all" style="--flex:3.9"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="20" x2="2%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">50.0</text>
+      <line x1="2.50%" y1="-14" x2="2.50%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="1.00%" y1="6.5" x2="4.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="2.50%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">50.1</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">54.0 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ COL 4: VHF/UHF ═══ -->
+  <div>
+
+    <!-- 2m -->
+    <div class="band">
+      <div class="band-title">2 Meters (144 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G,T</div>
+          <div class="bar-seg seg-cw"  style="--flex:0.1"></div>
+          <div class="bar-seg seg-all" style="--flex:3.9"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="20" x2="2%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">144.0</text>
+      <line x1="2.50%" y1="-14" x2="2.50%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="1.00%" y1="6.5" x2="4.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="2.50%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">144.1</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">148.0 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 1.25m -->
+    <div class="band">
+      <div class="band-title">1.25 Meters (222 MHz)</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G,T</div>
+          <div class="bar-seg seg-fdm" style="--flex:1.0"></div>
+          <div class="bar-seg seg-blocked" style="--flex:0.2"></div>
+          <div class="bar-seg seg-all" style="--flex:3.0"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N (25 W)</div>
+          <div class="bar-seg seg-gap" style="--flex:1.2"></div>
+          <div class="bar-seg seg-all" style="--flex:3.0"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-27" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">219.0</text>
+      <line x1="23.81%" y1="-27" x2="23.81%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="22.31%" y1="6.5" x2="25.31%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="23.81%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">220.0</text>
+      <line x1="28.57%" y1="-27" x2="28.57%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="27.07%" y1="20" x2="30.07%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="28.57%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">222.0</text>
+      <line x1="100%" y1="-27" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">225.0 MHz</text>
+      </svg>
+    </div>
+      <div style="font-size:6.5px;color:rgba(255,255,255,0.4);padding-left:30px;font-family:'Space Mono',monospace;">219–220 MHz: Fixed digital msg forwarding only</div>
+    </div>
+
+    <!-- 70cm -->
+    <div class="band">
+      <div class="band-title">70 cm (420 MHz)*</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G,T</div>
+          <div class="bar-seg seg-all" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">420.0 MHz</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">450.0 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 33cm -->
+    <div class="band">
+      <div class="band-title">33 cm (902 MHz)*</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label">E,A,G,T</div>
+          <div class="bar-seg seg-all" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap">
+      <svg width="100%" height="16" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-14" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">902.0 MHz</text>
+      <line x1="100%" y1="-14" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="6.5" x2="100%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">928.0 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <!-- 23cm -->
+    <div class="band">
+      <div class="band-title">23 cm (1240 MHz)*</div>
+      <div class="bars-wrap">
+        <div class="bar-row">
+          <div class="bar-label xs">E,A,G,T</div>
+          <div class="bar-seg seg-all" style="--flex:12"></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label xs">N (5 W)</div>
+          <div class="bar-seg seg-gap" style="--flex:6"></div>
+          <div class="bar-seg seg-all" style="--flex:5"></div>
+          <div class="bar-seg seg-gap" style="--flex:1"></div>
+        </div>
+      </div>
+    <div class="tick-ruler-wrap xs">
+      <svg width="100%" height="32" style="display:block;overflow:visible;" aria-hidden="true">
+      <line x1="0" y1="2" x2="100%" y2="2" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+      <line x1="0%" y1="-27" x2="0%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="0%" y1="6.5" x2="2%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="0%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="start" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1240</text>
+      <line x1="50.00%" y1="-27" x2="50.00%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="48.5%" y1="6.5" x2="51.5%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="50.00%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1270</text>
+      <line x1="91.67%" y1="-27" x2="91.67%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="90.17%" y1="6.5" x2="93.17%" y2="6.5" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="91.67%" y="14" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1295</text>
+      <line x1="100%" y1="-27" x2="100%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <line x1="98%" y1="20" x2="100%" y2="20" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+      <text x="100%" y="28" stroke="#0a0a1a" stroke-width="3" paint-order="stroke" stroke-linejoin="round" text-anchor="end" fill="rgba(255,255,255,0.8)" font-family="Space Mono, monospace" font-size="7">1300 MHz</text>
+      </svg>
+    </div>
+    </div>
+
+    <div class="geo-note">
+      <strong>*</strong> Geographical and power restrictions may apply to all bands above 420 MHz.
+      See <strong>FCC §97.303</strong> Frequency sharing requirements for your area.
+    </div>
+
+    <!-- Microwave -->
+    <div class="mw-box">
+      <div class="mw-title">Microwave — All Licensees Except Novice</div>
+      <div style="font-size:7px;color:rgba(255,255,255,0.45);margin-bottom:3px;">All modes authorized:</div>
+      <div class="mw-grid">
+        <div class="mw-item">2300–2310 MHz</div>
+        <div class="mw-item">10.0–10.5 GHz ‡</div>
+        <div class="mw-item">2390–2450 MHz</div>
+        <div class="mw-item">24.0–24.25 GHz</div>
+        <div class="mw-item">3300–3450 MHz</div>
+        <div class="mw-item">47.0–47.2 GHz</div>
+        <div class="mw-item">5650–5925 MHz</div>
+        <div class="mw-item">76.0–81.0 GHz</div>
+        <div class="mw-item">122.25–123.0 GHz</div>
+        <div class="mw-item">134–141 GHz</div>
+        <div class="mw-item">241–250 GHz</div>
+        <div class="mw-item">All above 275 GHz</div>
+      </div>
+      <div style="font-size:6.5px;color:rgba(255,255,255,0.35);margin-top:2px;font-family:'Space Mono',monospace;">‡ No pulse emissions on 10.0–10.5 GHz</div>
+    </div>
+
+  </div>
+</div><!-- end .main -->
+</div><!-- end .page-wrap -->
+
+<script>
+  (function () {
+    var PAGE_W = 1030; // 10.6in content + padding, in CSS px
+    function fit() { document.body.style.zoom = Math.max(1, (window.innerWidth - 8) / PAGE_W); }
+    window.addEventListener('resize', fit);
+    window.addEventListener('beforeprint', function () { document.body.style.zoom = 1; });
+    window.addEventListener('afterprint', fit);
+    fit();
+  })();
+</script>
+</body>
+</html>
